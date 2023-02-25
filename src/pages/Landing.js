@@ -3,6 +3,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
+export const LandingContext = createContext()
+
 function Landing() {
     const tabList = [
         { value: "dashboard", label: "儀表板" },
@@ -11,17 +13,18 @@ function Landing() {
     ]
     const [currentTab, setCurrentTab] = useState(tabList[0]);
   
-    const handleChange = (event, newValue) => {
+    const handleClickTab = (event, newValue) => {
       setCurrentTab(newValue);
     };
 
     return (
+        <LandingContext.Provider value={{ }}>
         <Container maxWidth="lg">
             This is the landing page
             <Box sx={{ width: '100%' }}>
                 <Tabs
                     value={currentTab}
-                    onChange={(e, value) => handleChange(e, value)}
+                    onChange={(e, value) => handleClickTab(e, value)}
                     textColor="secondary"
                     indicatorColor="secondary"
                     aria-label="secondary tabs example"
@@ -40,14 +43,21 @@ function Landing() {
                                 return (
                                     <Dashboard />
                                 )
-                            } else if (currentTab === "dashboard") {
-                                
+                            } else if (currentTab === "menu") {
+                                return (
+                                    <Menu />
+                                )
+                            } else if (currentTab === "discount") {
+                                return (
+                                    <Discount />
+                                )
                             }
                         }}
                     </TabPanel>
                 </Tabs>
             </Box>
         </Container>
+        </LandingContext.Provider>
     )
 }
 
