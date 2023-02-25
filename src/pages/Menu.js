@@ -1,12 +1,12 @@
 import React from 'react';
 
-function Dashboard() {
+function Menu() {
 
     return (
         <Container maxWidth="lg">
-            This is the dashboard page
+            This is the menu page
         </Container>
     )
 };
 
-export default Dashboard;
+export default Menu;
