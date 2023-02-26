@@ -1,14 +1,13 @@
 import React from 'react';
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useState } from 'react';
-import { Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
+import CustomButton from './CustomButton';
 
-function CustomDialog(props, ref) {
+function CustomDialog(props) {
     const { open, setOpen, title, content, leftLabel, leftAction, rightLabel, rightAction } = props;
 
     const defaultHandleClose = () => {
@@ -21,7 +20,7 @@ function CustomDialog(props, ref) {
             onClose={rightAction ?? defaultHandleClose}
             PaperProps={{
                 style: {
-                    borderRadius: 15,
+                    borderRadius: 16,
                     padding: '5px 10px'
                 }
             }}
@@ -38,10 +37,22 @@ function CustomDialog(props, ref) {
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                {leftLabel &&
-                    <Button onClick={leftAction ?? defaultHandleClose}>{leftLabel ?? 'Cancel'}</Button>
-                }
-                <Button onClick={rightAction ?? defaultHandleClose}>{rightLabel ?? 'OK'}</Button>
+                <Grid container justifyContent="flex-end" spacing={1}>
+                    <Grid item md={3} sm={6} xs={12}>
+                        <CustomButton
+                            fullWidth
+                            onClick={leftAction ?? defaultHandleClose}
+                            description={leftLabel ?? 'Cancel'}
+                        />
+                    </Grid>
+                    <Grid item md={3} sm={6} xs={12}>
+                        <CustomButton
+                            fullWidth
+                            onClick={rightAction ?? defaultHandleClose}
+                            description={rightLabel ?? 'OK'}
+                        />
+                    </Grid>
+                </Grid>
             </DialogActions>
         </Dialog >
     );

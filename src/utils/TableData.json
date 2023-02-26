@@ -1,0 +1,42 @@
+[
+    {
+        "id": "S21001",
+        "name": "Chicken Fried Rice",
+        "originalPrice": 100,
+        "category": [
+            {
+                "id": 1,
+                "label": "Vegan"
+            }
+        ],
+        "belongs": []
+    },
+    {
+        "id": "S21002",
+        "name": "Fried Flat Noodles With Beef",
+        "originalPrice": 200,
+        "category": [],
+        "belongs": []
+    },
+    {
+        "id": "S21003",
+        "name": "Fuk Kin Fried Rice",
+        "originalPrice": 150,
+        "category": [],
+        "belongs": []
+    },
+    {
+        "id": "S21004",
+        "name": "All-day English Breakfast",
+        "originalPrice": 1500,
+        "category": [],
+        "belongs": []
+    },
+    {
+        "id": "S21005",
+        "name": "Beef Wellington",
+        "originalPrice": 9999,
+        "category": [],
+        "belongs": []
+    }
+]

@@ -1,11 +1,11 @@
 import React from 'react'
 
-function NavBar() {
+function MenuForm() {
     return (
         <div>
-            Navigation
+
         </div>
     )
 }
 
-export default NavBar
+export default MenuForm

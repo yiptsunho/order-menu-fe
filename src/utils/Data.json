@@ -1,0 +1,177 @@
+[
+    {
+        "fieldList": [
+            {
+                "fieldName": "id",
+                "label": "Item code:",
+                "value": "S21001"
+            },
+            {
+                "fieldName": "name",
+                "label": "Item name:",
+                "value": "Chicken Fried Rice"
+            },
+            {
+                "fieldName": "originalPrice",
+                "label": "Original price:",
+                "value": 100
+            },
+            {
+                "fieldName": "image",
+                "label": "Item image:",
+                "value": ""
+            },
+            {
+                "fieldName": "category",
+                "label": "Category:",
+                "value": [
+                    {
+                        "id": 1,
+                        "label": "Vegan"
+                    }
+                ]
+            },
+            {
+                "fieldName": "belongs",
+                "label": "Belongs to menu:",
+                "value": []
+            }
+        ]
+    },
+    {
+        "fieldList": [
+            {
+                "fieldName": "id",
+                "label": "Item code:",
+                "value": "S21002"
+            },
+            {
+                "fieldName": "name",
+                "label": "Item name:",
+                "value": "Fried Flat Noodles With Beef"
+            },
+            {
+                "fieldName": "originalPrice",
+                "label": "Original price (HKD):",
+                "value": 200
+            },
+            {
+                "fieldName": "image",
+                "label": "Item image:",
+                "value": ""
+            },
+            {
+                "fieldName": "category",
+                "label": "Category:",
+                "value": []
+            },
+            {
+                "fieldName": "belongs",
+                "label": "Belongs to menu:",
+                "value": []
+            }
+        ]
+    },
+    {
+        "fieldList": [
+            {
+                "fieldName": "id",
+                "label": "Item code:",
+                "value": "S21003"
+            },
+            {
+                "fieldName": "name",
+                "label": "Item name:",
+                "value": "Fuk Kin Fried Rice"
+            },
+            {
+                "fieldName": "originalPrice",
+                "label": "Original price (HKD):",
+                "value": 150
+            },
+            {
+                "fieldName": "image",
+                "label": "Item image:",
+                "value": ""
+            },
+            {
+                "fieldName": "category",
+                "label": "Category:",
+                "value": []
+            },
+            {
+                "fieldName": "belongs",
+                "label": "Belongs to menu:",
+                "value": []
+            }
+        ]
+    },
+    {
+        "fieldList": [
+            {
+                "fieldName": "id",
+                "label": "Item code:",
+                "value": "S21004"
+            },
+            {
+                "fieldName": "name",
+                "label": "Item name:",
+                "value": "All-day English Breakfast"
+            },
+            {
+                "fieldName": "originalPrice",
+                "label": "Original price (HKD):",
+                "value": 1500
+            },
+            {
+                "fieldName": "image",
+                "label": "Item image:",
+                "value": ""
+            },
+            {
+                "fieldName": "category",
+                "label": "Category:",
+                "value": []
+            },
+            {
+                "fieldName": "belongs",
+                "label": "Belongs to menu:",
+                "value": []
+            }
+        ]
+    },
+    {
+        "fieldList": [
+            {
+                "fieldName": "id",
+                "label": "Item code:",
+                "value": "S21005"
+            },
+            {
+                "fieldName": "name",
+                "label": "Item name:",
+                "value": "Beef Wellington"
+            },
+            {
+                "fieldName": "originalPrice",
+                "label": "Original price (HKD):",
+                "value": 9999
+            },
+            {
+                "fieldName": "image",
+                "label": "Item image:",
+                "value": ""
+            },
+            {
+                "fieldName": "category",
+                "label": "Category:",
+                "value": []
+            },
+            {
+                "fieldName": "belongs",
+                "label": "Belongs to menu:",
+                "value": []
+            }
+        ]
+    }
+]
