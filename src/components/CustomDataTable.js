@@ -2,7 +2,7 @@ import Box from '@mui/material/Box/Box';
 import { DataGrid, GridToolbarQuickFilter } from '@mui/x-data-grid';
 import React, { useState } from 'react';
 
-function CustomTable(props) {
+function CustomDataTable(props) {
     const { rows, columns, pageSize, rowsPerPageOptions, components, initialState, sx } = props
     const [currentPageSize, setCurrentPageSize] = useState(pageSize ?? 5)
 
@@ -23,4 +23,4 @@ function CustomTable(props) {
     )
 };
 
-export default CustomTable;
+export default CustomDataTable;

@@ -15,28 +15,52 @@
         "id": "S21002",
         "name": "Fried Flat Noodles With Beef",
         "originalPrice": 200,
-        "category": [],
+        "category": [
+            {
+                "id": 2,
+                "label": "Popular"
+            },
+            {
+                "id": 6,
+                "label": "Lunch"
+            }
+        ],
         "belongs": []
     },
     {
         "id": "S21003",
         "name": "Fuk Kin Fried Rice",
         "originalPrice": 150,
-        "category": [],
+        "category": [
+            {
+                "id": 3,
+                "label": "BreakFast"
+            }
+        ],
         "belongs": []
     },
     {
         "id": "S21004",
         "name": "All-day English Breakfast",
         "originalPrice": 1500,
-        "category": [],
+        "category": [
+            {
+                "id": 4,
+                "label": "Dinner"
+            }
+        ],
         "belongs": []
     },
     {
         "id": "S21005",
         "name": "Beef Wellington",
         "originalPrice": 9999,
-        "category": [],
+        "category": [
+            {
+                "id": 5,
+                "label": "Healthy"
+            }
+        ],
         "belongs": []
     }
 ]

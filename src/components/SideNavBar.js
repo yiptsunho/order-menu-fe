@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Sidebar, Menu, MenuItem, useProSidebar, SubMenu } from 'react-pro-sidebar';
 import Home from "@mui/icons-material/HomeRounded";
 import MenuIcon from "@mui/icons-material/MenuRounded";
@@ -8,11 +8,35 @@ import { Link, Outlet } from 'react-router-dom';
 import { Container } from '@mui/system';
 
 function SideNavBar() {
-    const { collapseSidebar } = useProSidebar();
+    const { collapseSidebar, broken, toggleSidebar, collapsed } = useProSidebar();
+    // const [width, setWidth] = useState("")
+    // const getSize = () => {
+    //     setWidth(window.innerWidth)
+    // }
+
+    // useEffect(() => {
+    //     window.addEventListener('resize', getSize)
+    //     if (width < 400) {
+    //         collapseSidebar()
+    //     } else {
+    //         collapseSidebar()
+    //     }
+    //     return () => {
+    //         window.removeEventListener
+    //     }
+    // }, [])
+
 
     return (
-        <div id="app" style={{ height: "100vh", display: "flex", background: "#F5F7FB" }}>
-            <Sidebar style={{ height: "100vh" }}>
+        <React.Fragment>
+            {/* <div id="app" style={{ display: 'flex', height: '100vh' }}> */}
+            {/* <div id="app" style={{ width: "100vw", height: "100vh", display: "flex", background: "#F5F7FB" }}> */}
+            <Sidebar
+                defaultCollapsed
+                breakPoint="md"
+                style={{ height: "100vh" }
+                }
+            >
                 <Menu>
                     <MenuItem
                         icon={<MenuIcon />}
@@ -26,11 +50,27 @@ function SideNavBar() {
                     </MenuItem>
                     <MenuItem
                         icon={<Home sx={{ color: "#fd7e5b" }} />}
-                        component={<Link to="dashboard" />}
+                        component={<Link to="/dashboard" />}
+                        onClick={() => {
+                            if (!collapsed) {
+                                collapseSidebar();
+                            }
+                        }}
                     >
                         Dashboard
                     </MenuItem>
-                    <SubMenu
+                    <MenuItem
+                        icon={<MenuBook sx={{ color: "#fd7e5b" }} />}
+                        component={<Link to="/manageitem" />}
+                        onClick={() => {
+                            if (!collapsed) {
+                                collapseSidebar();
+                            }
+                        }}
+                    >
+                        Menu
+                    </MenuItem>
+                    {/* <SubMenu
                         icon={<MenuBook sx={{ color: "#fd7e5b" }} />}
                         label="Menu"
                     >
@@ -44,19 +84,30 @@ function SideNavBar() {
                         >
                             Manage Menu
                         </MenuItem>
-                    </SubMenu>
+                    </SubMenu> */}
                     <MenuItem
                         icon={<Discount sx={{ color: "#fd7e5b" }} />}
-                        component={<Link to="discount" />}
+                        component={<Link to="/discount" />}
+                        onClick={() => {
+                            if (!collapsed) {
+                                collapseSidebar();
+                            }
+                        }}
                     >
                         Discount
                     </MenuItem>
                 </Menu>
             </Sidebar>
-            <Container maxWidth="xl" height="100vh">
+            {/* <Container maxWidth="xl" height="100vh" sx={{ background: "#F5F7FB" }}>
+                {broken &&
+                    <button className="sb-button" onClick={() => toggleSidebar()}>
+                        Toggle
+                    </button>
+                }
                 <Outlet />
-            </Container>
-        </div>
+            </Container> */}
+        </React.Fragment>
+        // </div>
     )
 };
 

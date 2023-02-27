@@ -1,20 +1,37 @@
 import { MenuBook } from '@mui/icons-material';
 import { Container, CssBaseline, Grid, Paper, Icon, Typography, Card, CardContent, CardActions, Button } from '@mui/material';
 import React from 'react';
+import { Line } from 'react-chartjs-2';
+import 'chart.js/auto';
+import RevenueChart from './RevenueChart';
+import OrderSummaryChart from './OrderSummaryChart';
+import CustomerChart from './CustomerChart';
 
 function Dashboard() {
+    // const labels = Utils.months({ count: 7 });
+    const labels = ["January", "February", "March", "April", "May", "June", "July"]
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'My First Dataset',
+            data: [65, 59, 80, 81, 56, 55, 40],
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+        }]
+    };
 
     return (
         <React.Fragment>
             <CssBaseline />
-            <Container height="100%">
+            <Container maxWidth="xl" height="100%">
                 <h1>Good morning, Admin</h1>
                 <h5>Here is what happeing in your restaurant</h5>
-                <Container disableGutters>
+                <Container maxWidth="xl" disableGutters>
                     <Grid container rowSpacing={2}>
                         <Grid container item md={12} alignItems='stretch' columnSpacing={3}>
                             <Grid item md={3} display="flex">
-                                <Card sx={{ borderRadius: "12px", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
+                                <Card sx={{ borderRadius: "12px", width: "-webkit-fill-available", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
                                     <CardContent>
                                         <Grid container display="flex" alignItems="center" columnSpacing={1}>
                                             <Grid item md={3} display="flex" justifyContent="center">
@@ -39,7 +56,7 @@ function Dashboard() {
                                 </Card>
                             </Grid>
                             <Grid item md={3} display="flex">
-                                <Card sx={{ borderRadius: "12px", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
+                                <Card sx={{ borderRadius: "12px", width: "-webkit-fill-available", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
                                     <CardContent>
                                         <Grid container display="flex" alignItems="center" columnSpacing={1}>
                                             <Grid item md={3} display="flex" justifyContent="center">
@@ -62,7 +79,7 @@ function Dashboard() {
                                 </Card>
                             </Grid>
                             <Grid item md={3} display="flex">
-                                <Card sx={{ borderRadius: "12px", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
+                                <Card sx={{ borderRadius: "12px", width: "-webkit-fill-available", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
                                     <CardContent>
                                         <Grid container display="flex" alignItems="center" columnSpacing={1}>
                                             <Grid item md={3} display="flex" justifyContent="center">
@@ -85,7 +102,7 @@ function Dashboard() {
                                 </Card>
                             </Grid>
                             <Grid item md={3} display="flex">
-                                <Card sx={{ borderRadius: "12px", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
+                                <Card sx={{ borderRadius: "12px", width: "-webkit-fill-available", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
                                     <CardContent>
                                         <Grid container display="flex" alignItems="center" columnSpacing={1}>
                                             <Grid item md={3} display="flex" justifyContent="center">
@@ -106,6 +123,68 @@ function Dashboard() {
                                         </Grid>
                                     </CardContent>
                                 </Card>
+                            </Grid>
+                        </Grid>
+                        <Grid container item md={12} alignItems='stretch' columnSpacing={3}>
+                            <Grid item md={6} display="flex">
+                                <Card sx={{ borderRadius: "12px", width: "-webkit-fill-available", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
+                                    <CardContent>
+                                        <Grid container>
+                                            Revenue
+                                            <RevenueChart />
+                                        </Grid>
+                                    </CardContent>
+                                </Card>
+                                {/* <Grid container>
+                                    Revenue scatter chart
+                                    <RevenueChart />
+                                </Grid> */}
+                            </Grid>
+                            <Grid item md={6} display="flex">
+                                <Card sx={{ borderRadius: "12px", width: "-webkit-fill-available", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
+                                    <CardContent>
+                                        <Grid container>
+                                            Order Summary
+                                            <OrderSummaryChart />
+                                        </Grid>
+                                    </CardContent>
+                                </Card>
+                                {/* <Grid container>
+                                    Order summary breakdown pie chart
+                                    <OrderSummaryChart />
+                                </Grid> */}
+                            </Grid>
+                        </Grid>
+                        <Grid container item md={12} alignItems='stretch' columnSpacing={3}>
+                            <Grid item md={12} display="flex">
+                                <Card sx={{ borderRadius: "12px", width: "-webkit-fill-available", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
+                                    <CardContent>
+                                        <Grid container>
+                                            Now vs Returning Customers
+                                            <CustomerChart />
+                                        </Grid>
+                                    </CardContent>
+                                </Card>
+                                {/* <Grid container>
+                                    Now vs Returning customer double bar chart
+                                    <CustomerChart />
+                                </Grid> */}
+                            </Grid>
+                        </Grid>
+                        <Grid container item md={12} alignItems='stretch'>
+                            <Grid item md={12} display="flex">
+                                <Card sx={{ borderRadius: "12px", width: "-webkit-fill-available", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
+                                    <CardContent>
+                                        <Grid container>
+                                            Top selling products
+
+                                        </Grid>
+                                    </CardContent>
+                                </Card>
+                                {/* <Grid container>
+                                    Top selling product table
+
+                                </Grid> */}
                             </Grid>
                         </Grid>
                     </Grid>

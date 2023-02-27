@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import dataList from '../../utils/Data.json'
 
 function EditItem() {
-    const { id } = useLocation().state.params
+    const { id } = useLocation().state
     const selectedData = dataList
     const data = selectedData.find(field => field.fieldList[0].value === id)
     const handleEditItem = (params) => {

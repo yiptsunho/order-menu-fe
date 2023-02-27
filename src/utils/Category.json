@@ -5,6 +5,22 @@
     },
     {
         "id": 2,
-        "label": "Hala food"
+        "label": "Popular"
+    },
+    {
+        "id": 3,
+        "label": "BreakFast"
+    },
+    {
+        "id": 4,
+        "label": "Dinner"
+    },
+    {
+        "id": 5,
+        "label": "Healthy"
+    },
+    {
+        "id": 6,
+        "label": "Lunch"
     }
 ]

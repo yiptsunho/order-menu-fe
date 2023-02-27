@@ -1,15 +1,19 @@
-import { Autocomplete, Box, Button, ButtonGroup, Container, CssBaseline, Grid, IconButton, TextField, ToggleButtonGroup, Tooltip, Paper } from '@mui/material';
-import React, { useRef, useState } from 'react';
+import { Autocomplete, Box, Button, ButtonGroup, Container, CssBaseline, Grid, IconButton, TextField, ToggleButtonGroup, Tooltip, Paper, Card, CardActionArea, CardMedia, CardContent, Typography } from '@mui/material';
+import React, { createContext, useRef, useState } from 'react';
 import CustomButton from '../../components/CustomButton';
-import CustomTable from '../../components/CustomTable';
+import CustomDataTable from '../../components/CustomDataTable';
 import Search from '@mui/icons-material/Search';
 import { Delete, Edit } from '@mui/icons-material';
 import itemList from '../../utils/Data.json'
 import category from '../../utils/Category.json'
-import { GridLinkOperator, GridToolbarQuickFilter } from '@mui/x-data-grid';
-import { useNavigate } from 'react-router-dom';
+import { GridLinkOperator, gridRowsLoadingSelector, GridToolbarQuickFilter } from '@mui/x-data-grid';
+import { useLocation, useNavigate } from 'react-router-dom';
 import rows from '../../utils/TableData.json'
 import CustomDialog from '../../components/CustomDialog';
+import Carousel from 'react-multi-carousel'
+import { POPULAR_PHOTO, VEGAN_PHOTO, HEALTHY_PHOTO, BREAKFAST_PHOTO, LUNCH_PHOTO, DINNER_PHOTO } from '../../utils/Constants';
+import 'react-multi-carousel/lib/styles.css';
+import '../../App.css'
 
 function QuickSearchToolbar() {
     return (
@@ -28,9 +32,28 @@ function QuickSearchToolbar() {
 }
 
 function ManageItem() {
+    const location = useLocation();
     const navigate = useNavigate();
     const [openDialog, setOpenDialog] = useState(false)
+    const [filteredRows, setFilteredRows] = useState(rows)
     const itemId = useRef()
+    const responsive = {
+        desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items: 3,
+            slidesToSlide: 3 // optional, default to 1.
+        },
+        tablet: {
+            breakpoint: { max: 1024, min: 464 },
+            items: 2,
+            slidesToSlide: 2 // optional, default to 1.
+        },
+        mobile: {
+            breakpoint: { max: 464, min: 0 },
+            items: 1,
+            slidesToSlide: 1 // optional, default to 1.
+        }
+    };
     const tableColumns = [
         {
             field: 'id',
@@ -125,7 +148,7 @@ function ManageItem() {
     ];
 
     const handleEdit = (params) => {
-        navigate("/landing/edititem", { state: { params: params } })
+        navigate("/landing/edititem", { state: { id: params } })
     }
 
     const handleDelete = (params) => {
@@ -137,19 +160,135 @@ function ManageItem() {
         console.log(params)
     }
 
+    const handleFilter = (filterValue) => {
+        let newRows = rows;
+        newRows = newRows.filter(row => row.category.some(category => category.id === filterValue.id))
+        setFilteredRows(newRows)
+        console.log(newRows)
+    }
+
     return (
         <React.Fragment>
             <CssBaseline />
             <Container maxWidth="xl" height='100%'>
-                <h1>Manage your cuisines</h1>
+                <h1>Manage your menu</h1>
                 {/* TODO: Add a search field and a toggle button for filtering
                 TODO: Add a add item button (and bulk add button) */}
                 <Paper elevation={3} sx={{ borderRadius: "16px" }}>
                     <Container maxWidth="xl">
-                        <Grid container rowSpacing={2} paddingY={3}>
-                            <Grid container item alignItems="center">
+                        {/* <Grid container spacing={2} display="flex" paddingY={2} align-items="center" justify-content="space-between"> */}
+                        <Grid paddingY={2} height="200px">
+                            <Carousel
+                                draggable={false}
+                                responsive={responsive}
+                                containerClass="carousel-container"
+                                removeArrowOnDeviceType={["tablet", "mobile"]}
+                                dotListClass="custom-dot-list-style"
+                                itemClass="carousel-item"
+                            >
+                                <Card sx={{ position: "relative", height: "100%", borderRadius: "10px" }}>
+                                    <CardActionArea sx={{ position: "relative", height: "100%" }} onClick={() => handleFilter({ "id": 2, "label": "Popular" })}>
+                                        <CardMedia
+                                            media="picture"
+                                            alt="Contemplative Reptile"
+                                            image={POPULAR_PHOTO}
+                                            title="Contemplative Reptile"
+                                            sx={{ position: "absolute", top: "0", right: "0", height: "100%", width: "100%" }}
+                                            value={{ "id": 1, "label": "Vegan" }}
+                                        />
+                                        <CardContent sx={{ position: "relative", backgroundColor: "transparent", color: "#ffffff" }}>
+                                            <Typography gutterBottom variant="h5" component="h2">
+                                                Popular
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                                <Card sx={{ position: "relative", height: "100%", borderRadius: "10px" }}>
+                                    <CardActionArea sx={{ position: "relative", height: "100%" }} onClick={() => handleFilter({ "id": 1, "label": "Vegan" })}>
+                                        <CardMedia
+                                            media="picture"
+                                            alt="Contemplative Reptile"
+                                            image={VEGAN_PHOTO}
+                                            title="Contemplative Reptile"
+                                            sx={{ position: "absolute", top: "0", right: "0", height: "100%", width: "100%" }}
+                                        />
+                                        <CardContent sx={{ position: "relative", backgroundColor: "transparent", color: "#ffffff", display: "flex", justifyContent: "end" }}>
+                                            <Typography gutterBottom variant="h5" component="h2">
+                                                Vegan
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                                <Card sx={{ position: "relative", height: "100%", borderRadius: "10px" }}>
+                                    <CardActionArea sx={{ position: "relative", height: "100%" }} onClick={() => handleFilter({ "id": 5, "label": "Healthy" })}>
+                                        <CardMedia
+                                            media="picture"
+                                            alt="Contemplative Reptile"
+                                            image={HEALTHY_PHOTO}
+                                            title="Contemplative Reptile"
+                                            sx={{ position: "absolute", top: "0", right: "0", height: "100%", width: "100%" }}
+                                        />
+                                        <CardContent sx={{ position: "relative", backgroundColor: "transparent", color: "#ffffff" }}>
+                                            <Typography gutterBottom variant="h5" component="h2">
+                                                Healthy
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                                <Card sx={{ position: "relative", height: "100%", borderRadius: "10px" }}>
+                                    <CardActionArea sx={{ position: "relative", height: "100%" }} onClick={() => handleFilter({ "id": 3, "label": "BreakFast" })}>
+                                        <CardMedia
+                                            media="picture"
+                                            alt="Contemplative Reptile"
+                                            image={BREAKFAST_PHOTO}
+                                            title="Contemplative Reptile"
+                                            sx={{ position: "absolute", top: "0", right: "0", height: "100%", width: "100%" }}
+                                        />
+                                        <CardContent sx={{ position: "relative", backgroundColor: "transparent", color: "#ffffff", display: "flex", justifyContent: "end" }}>
+                                            <Typography gutterBottom variant="h5" component="h2">
+                                                Breakfast
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                                <Card sx={{ position: "relative", height: "100%", borderRadius: "10px" }}>
+                                    <CardActionArea sx={{ position: "relative", height: "100%" }} onClick={() => handleFilter({ "id": 6, "label": "Lunch" })}>
+                                        <CardMedia
+                                            media="picture"
+                                            alt="Contemplative Reptile"
+                                            image={LUNCH_PHOTO}
+                                            title="Contemplative Reptile"
+                                            sx={{ position: "absolute", top: "0", right: "0", height: "100%", width: "100%" }}
+                                        />
+                                        <CardContent sx={{ position: "relative", backgroundColor: "transparent", color: "#ffffff" }}>
+                                            <Typography gutterBottom variant="h5" component="h2">
+                                                Lunch
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                                <Card sx={{ position: "relative", height: "100%", borderRadius: "10px" }}>
+                                    <CardActionArea sx={{ position: "relative", height: "100%" }} onClick={() => handleFilter({ "id": 4, "label": "Dinner" })}>
+                                        <CardMedia
+                                            media="picture"
+                                            alt="Contemplative Reptile"
+                                            image={DINNER_PHOTO}
+                                            title="Contemplative Reptile"
+                                            sx={{ position: "absolute", top: "0", right: "0", height: "100%", width: "100%" }}
+                                        />
+                                        <CardContent sx={{ position: "relative", backgroundColor: "transparent", color: "#ffffff", display: "flex", justifyContent: "end" }}>
+                                            <Typography gutterBottom variant="h5" component="h2">
+                                                Dinner
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                            </Carousel>
+                        </Grid>
+                        <Grid container rowSpacing={2} paddingY={3} paddingX="15px">
+                            <Grid container item alignItems="center" spacing={2}>
                                 <Grid item md={2}>
-                                    <Tooltip title="Add">
+                                    <Tooltip title="Add item">
                                         <CustomButton
                                             fullWidth={true}
                                             onClick={() => navigate("/landing/additem")}
@@ -157,12 +296,39 @@ function ManageItem() {
                                         />
                                     </Tooltip>
                                 </Grid>
+                                <Grid item md={2}>
+                                    <Tooltip title="Add menu">
+                                        <CustomButton
+                                            fullWidth={true}
+                                            onClick={() => navigate("/landing/addmenu")}
+                                            description="Add menu"
+                                        />
+                                    </Tooltip>
+                                </Grid>
+                                <Grid item md={2}>
+                                    <Tooltip title="Edit menu">
+                                        <CustomButton
+                                            fullWidth={true}
+                                            onClick={() => navigate("/landing/editmenu")}
+                                            description="Edit menu"
+                                        />
+                                    </Tooltip>
+                                </Grid>
+                                <Grid item md={2}>
+                                    <Tooltip title="Reset filter">
+                                        <CustomButton
+                                            fullWidth={true}
+                                            onClick={() => setFilteredRows(rows)}
+                                            description="Reset filter"
+                                        />
+                                    </Tooltip>
+                                </Grid>
                             </Grid>
                             <Grid container item style={{ height: 600, width: '100%' }}>
                                 <Grid container item style={{ display: 'flex', height: '100%' }}>
                                     <Grid container item style={{ flexGrow: 1 }}>
-                                        <CustomTable
-                                            rows={rows}
+                                        <CustomDataTable
+                                            rows={filteredRows}
                                             columns={tableColumns}
                                             initialState={{
                                                 filter: {
@@ -188,7 +354,7 @@ function ManageItem() {
                         />
                     </Container>
                 </Paper>
-            </Container>
+            </Container >
         </React.Fragment>
     )
 };
