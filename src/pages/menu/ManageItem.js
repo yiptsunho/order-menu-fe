@@ -6,7 +6,7 @@ import Search from '@mui/icons-material/Search';
 import { Delete, Edit } from '@mui/icons-material';
 import itemList from '../../utils/Data.json'
 import category from '../../utils/Category.json'
-import { GridLinkOperator, gridRowsLoadingSelector, GridToolbarQuickFilter } from '@mui/x-data-grid';
+import { GridLinkOperator, gridRowsLoadingSelector, GridToolbarQuickFilter, GridToolbarContainer, GridToolbarExport } from '@mui/x-data-grid';
 import { useLocation, useNavigate } from 'react-router-dom';
 import rows from '../../utils/TableData.json'
 import CustomDialog from '../../components/CustomDialog';
@@ -14,12 +14,14 @@ import Carousel from 'react-multi-carousel'
 import { POPULAR_PHOTO, VEGAN_PHOTO, HEALTHY_PHOTO, BREAKFAST_PHOTO, LUNCH_PHOTO, DINNER_PHOTO } from '../../utils/Constants';
 import 'react-multi-carousel/lib/styles.css';
 import '../../App.css'
+import Export from '../../components/Export';
 
 function QuickSearchToolbar() {
     return (
-        <Box
-            sx={{ p: 0.5, pb: 0 }}
-        >
+        // <Box
+        //     sx={{ p: 0.5, pb: 0 }}
+        // >
+        <GridToolbarContainer>
             <GridToolbarQuickFilter
                 quickFilterParser={(searchInput) =>
                     searchInput.split(',').map((value) => value.trim())
@@ -27,7 +29,9 @@ function QuickSearchToolbar() {
                 quickFilterFormatter={(quickFilterValues) => quickFilterValues.join(', ')}
                 debounceMs={100} // time before applying the new quick filter value
             />
-        </Box>
+            <GridToolbarExport />
+        </GridToolbarContainer>
+        // </Box>
     )
 }
 
@@ -36,6 +40,7 @@ function ManageItem() {
     const navigate = useNavigate();
     const [openDialog, setOpenDialog] = useState(false)
     const [filteredRows, setFilteredRows] = useState(rows)
+    const printRef = useRef()
     const itemId = useRef()
     const responsive = {
         desktop: {
@@ -148,7 +153,7 @@ function ManageItem() {
     ];
 
     const handleEdit = (params) => {
-        navigate("/landing/edititem", { state: { id: params } })
+        navigate("/landing/edititem", { state: { id: params.id } })
     }
 
     const handleDelete = (params) => {
@@ -287,7 +292,7 @@ function ManageItem() {
                         </Grid>
                         <Grid container rowSpacing={2} paddingY={3} paddingX="15px">
                             <Grid container item alignItems="center" spacing={2}>
-                                <Grid item md={2}>
+                                <Grid item md={2} sm={4}>
                                     <Tooltip title="Add item">
                                         <CustomButton
                                             fullWidth={true}
@@ -296,7 +301,7 @@ function ManageItem() {
                                         />
                                     </Tooltip>
                                 </Grid>
-                                <Grid item md={2}>
+                                <Grid item md={2} sm={4}>
                                     <Tooltip title="Add menu">
                                         <CustomButton
                                             fullWidth={true}
@@ -305,7 +310,7 @@ function ManageItem() {
                                         />
                                     </Tooltip>
                                 </Grid>
-                                <Grid item md={2}>
+                                <Grid item md={2} sm={4}>
                                     <Tooltip title="Edit menu">
                                         <CustomButton
                                             fullWidth={true}
@@ -314,12 +319,32 @@ function ManageItem() {
                                         />
                                     </Tooltip>
                                 </Grid>
-                                <Grid item md={2}>
+                            </Grid>
+                            <Grid container item alignItems="center" spacing={2}>
+                                <Grid item md={2} sm={4}>
                                     <Tooltip title="Reset filter">
                                         <CustomButton
                                             fullWidth={true}
                                             onClick={() => setFilteredRows(rows)}
                                             description="Reset filter"
+                                        />
+                                    </Tooltip>
+                                </Grid>
+                                <Grid item md={2} sm={4}>
+                                    <Tooltip title="Export as png">
+                                        <CustomButton
+                                            fullWidth={true}
+                                            onClick={() => setFilteredRows(rows)}
+                                            description="Export as png"
+                                        />
+                                    </Tooltip>
+                                </Grid>
+                                <Grid item md={2} sm={4}>
+                                    <Tooltip title="Export as jpg">
+                                        <CustomButton
+                                            fullWidth={true}
+                                            onClick={() => setFilteredRows(rows)}
+                                            description="Export as jpg"
                                         />
                                     </Tooltip>
                                 </Grid>

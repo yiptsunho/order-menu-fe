@@ -1,43 +1,77 @@
 import React from 'react';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker';
+import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
-
-const options = {
-    responsive: true,
-    plugins: {
-        legend: {
-            position: 'top',
-        },
-        title: {
-            display: true,
-            text: 'Chart.js Bar Chart',
-        },
+const data = [
+    {
+        name: 'Aug',
+        Returning: 4000,
+        New: 2400,
+        amt: 2400,
     },
-};
+    {
+        name: 'Sep',
+        Returning: 3000,
+        New: 1398,
+        amt: 2210,
+    },
+    {
+        name: 'Oct',
+        Returning: 2000,
+        New: 9800,
+        amt: 2290,
+    },
+    {
+        name: 'Nov',
+        Returning: 2780,
+        New: 3908,
+        amt: 2000,
+    },
+    {
+        name: 'Dec',
+        Returning: 1890,
+        New: 4800,
+        amt: 2181,
+    },
+    {
+        name: 'Jan',
+        Returning: 2390,
+        New: 3800,
+        amt: 2500,
+    },
+    {
+        name: 'Feb',
+        Returning: 3490,
+        New: 4300,
+        amt: 2100,
+    },
+];
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-const data = {
-    labels,
-    datasets: [
-        {
-            label: 'Dataset 1',
-            data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        },
-        {
-            label: 'Dataset 2',
-            data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        },
-    ],
-};
 
 function CustomerChart() {
-    return <Bar options={options} data={data} />;
+    return (
+        <ResponsiveContainer width="99%" aspect={3}>
+            <BarChart
+                data={data}
+                margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                }}
+            >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="New" fill="#8884d8" />
+                <Bar dataKey="Returning" fill="#82ca9d" />
+            </BarChart>
+        </ResponsiveContainer>
+        // <Doughnut
+        //     data={data}
+        // />
+    );
 };
 
 export default CustomerChart;

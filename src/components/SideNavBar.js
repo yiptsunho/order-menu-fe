@@ -29,48 +29,47 @@ function SideNavBar() {
 
     return (
         <React.Fragment>
-            {/* <div id="app" style={{ display: 'flex', height: '100vh' }}> */}
-            {/* <div id="app" style={{ width: "100vw", height: "100vh", display: "flex", background: "#F5F7FB" }}> */}
-            <Sidebar
-                defaultCollapsed
-                breakPoint="md"
-                style={{ height: "100vh" }
-                }
-            >
-                <Menu>
-                    <MenuItem
-                        icon={<MenuIcon />}
-                        onClick={() => {
-                            collapseSidebar();
-                        }}
-                        style={{ textAlign: "center" }}
-                    >
-                        {" "}
-                        <h2>Admin</h2>
-                    </MenuItem>
-                    <MenuItem
-                        icon={<Home sx={{ color: "#fd7e5b" }} />}
-                        component={<Link to="/dashboard" />}
-                        onClick={() => {
-                            if (!collapsed) {
+            <div id="app" style={{ display: 'flex', background: "#F5F7FB" }}>
+                {/* <div id="app" style={{ width: "100vw", height: "100vh", display: "flex", background: "#F5F7FB" }}> */}
+                <Sidebar
+                    defaultCollapsed
+                    breakPoint="md"
+                    style={{ height: "100vh" }}
+                >
+                    <Menu>
+                        <MenuItem
+                            icon={<MenuIcon />}
+                            onClick={() => {
                                 collapseSidebar();
-                            }
-                        }}
-                    >
-                        Dashboard
-                    </MenuItem>
-                    <MenuItem
-                        icon={<MenuBook sx={{ color: "#fd7e5b" }} />}
-                        component={<Link to="/manageitem" />}
-                        onClick={() => {
-                            if (!collapsed) {
-                                collapseSidebar();
-                            }
-                        }}
-                    >
-                        Menu
-                    </MenuItem>
-                    {/* <SubMenu
+                            }}
+                            style={{ textAlign: "left" }}
+                        >
+                            {" "}
+                            <h2>Admin</h2>
+                        </MenuItem>
+                        <MenuItem
+                            icon={<Home sx={{ color: "#fd7e5b" }} />}
+                            component={<Link to="dashboard" />}
+                            onClick={() => {
+                                if (!collapsed) {
+                                    collapseSidebar();
+                                }
+                            }}
+                        >
+                            Dashboard
+                        </MenuItem>
+                        <MenuItem
+                            icon={<MenuBook sx={{ color: "#fd7e5b" }} />}
+                            component={<Link to="manageitem" />}
+                            onClick={() => {
+                                if (!collapsed) {
+                                    collapseSidebar();
+                                }
+                            }}
+                        >
+                            Menu
+                        </MenuItem>
+                        {/* <SubMenu
                         icon={<MenuBook sx={{ color: "#fd7e5b" }} />}
                         label="Menu"
                     >
@@ -85,29 +84,29 @@ function SideNavBar() {
                             Manage Menu
                         </MenuItem>
                     </SubMenu> */}
-                    <MenuItem
-                        icon={<Discount sx={{ color: "#fd7e5b" }} />}
-                        component={<Link to="/discount" />}
-                        onClick={() => {
-                            if (!collapsed) {
-                                collapseSidebar();
-                            }
-                        }}
-                    >
-                        Discount
-                    </MenuItem>
-                </Menu>
-            </Sidebar>
-            {/* <Container maxWidth="xl" height="100vh" sx={{ background: "#F5F7FB" }}>
-                {broken &&
-                    <button className="sb-button" onClick={() => toggleSidebar()}>
-                        Toggle
-                    </button>
-                }
-                <Outlet />
-            </Container> */}
+                        {/* <MenuItem
+                            icon={<Discount sx={{ color: "#fd7e5b" }} />}
+                            component={<Link to="discount" />}
+                            onClick={() => {
+                                if (!collapsed) {
+                                    collapseSidebar();
+                                }
+                            }}
+                        >
+                            Discount
+                        </MenuItem> */}
+                    </Menu>
+                </Sidebar>
+                <Container maxWidth="xl" height="100vh">
+                    {broken &&
+                        <button className="sb-button" onClick={() => toggleSidebar()}>
+                            Toggle
+                        </button>
+                    }
+                    <Outlet />
+                </Container>
+            </div>
         </React.Fragment>
-        // </div>
     )
 };
 

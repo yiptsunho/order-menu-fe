@@ -1,11 +1,12 @@
 import { MenuBook } from '@mui/icons-material';
 import { Container, CssBaseline, Grid, Paper, Icon, Typography, Card, CardContent, CardActions, Button } from '@mui/material';
 import React from 'react';
-import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 import RevenueChart from './RevenueChart';
 import OrderSummaryChart from './OrderSummaryChart';
 import CustomerChart from './CustomerChart';
+import SideNavBar from '../../components/SideNavBar';
+import TopSellingChart from './TopSellingChart';
 
 function Dashboard() {
     // const labels = Utils.months({ count: 7 });
@@ -29,8 +30,8 @@ function Dashboard() {
                 <h5>Here is what happeing in your restaurant</h5>
                 <Container maxWidth="xl" disableGutters>
                     <Grid container rowSpacing={2}>
-                        <Grid container item md={12} alignItems='stretch' columnSpacing={3}>
-                            <Grid item md={3} display="flex">
+                        <Grid container item md={12} alignItems='stretch' spacing={3}>
+                            <Grid item md={3} sm={6} display="flex">
                                 <Card sx={{ borderRadius: "12px", width: "-webkit-fill-available", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
                                     <CardContent>
                                         <Grid container display="flex" alignItems="center" columnSpacing={1}>
@@ -55,7 +56,7 @@ function Dashboard() {
                                     </CardContent>
                                 </Card>
                             </Grid>
-                            <Grid item md={3} display="flex">
+                            <Grid item md={3} sm={6} display="flex">
                                 <Card sx={{ borderRadius: "12px", width: "-webkit-fill-available", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
                                     <CardContent>
                                         <Grid container display="flex" alignItems="center" columnSpacing={1}>
@@ -78,7 +79,7 @@ function Dashboard() {
                                     </CardContent>
                                 </Card>
                             </Grid>
-                            <Grid item md={3} display="flex">
+                            <Grid item md={3} sm={6} display="flex">
                                 <Card sx={{ borderRadius: "12px", width: "-webkit-fill-available", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
                                     <CardContent>
                                         <Grid container display="flex" alignItems="center" columnSpacing={1}>
@@ -101,7 +102,7 @@ function Dashboard() {
                                     </CardContent>
                                 </Card>
                             </Grid>
-                            <Grid item md={3} display="flex">
+                            <Grid item md={3} sm={6} display="flex">
                                 <Card sx={{ borderRadius: "12px", width: "-webkit-fill-available", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
                                     <CardContent>
                                         <Grid container display="flex" alignItems="center" columnSpacing={1}>
@@ -125,11 +126,11 @@ function Dashboard() {
                                 </Card>
                             </Grid>
                         </Grid>
-                        <Grid container item md={12} alignItems='stretch' columnSpacing={3}>
+                        <Grid container item md={12} alignItems='stretch' spacing={3}>
                             <Grid item md={6} display="flex">
                                 <Card sx={{ borderRadius: "12px", width: "-webkit-fill-available", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
                                     <CardContent>
-                                        <Grid container>
+                                        <Grid container maxWidth="xl">
                                             Revenue
                                             <RevenueChart />
                                         </Grid>
@@ -143,8 +144,8 @@ function Dashboard() {
                             <Grid item md={6} display="flex">
                                 <Card sx={{ borderRadius: "12px", width: "-webkit-fill-available", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
                                     <CardContent>
-                                        <Grid container>
-                                            Order Summary
+                                        <Grid container maxWidth="xl">
+                                            Takeaway Order Summary
                                             <OrderSummaryChart />
                                         </Grid>
                                     </CardContent>
@@ -159,8 +160,8 @@ function Dashboard() {
                             <Grid item md={12} display="flex">
                                 <Card sx={{ borderRadius: "12px", width: "-webkit-fill-available", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
                                     <CardContent>
-                                        <Grid container>
-                                            Now vs Returning Customers
+                                        <Grid container maxWidth="xl">
+                                            New vs Returning Customers
                                             <CustomerChart />
                                         </Grid>
                                     </CardContent>
@@ -177,7 +178,7 @@ function Dashboard() {
                                     <CardContent>
                                         <Grid container>
                                             Top selling products
-
+                                            <TopSellingChart />
                                         </Grid>
                                     </CardContent>
                                 </Card>
@@ -190,7 +191,7 @@ function Dashboard() {
                     </Grid>
                 </Container>
             </Container>
-        </React.Fragment>
+        </React.Fragment >
     )
 };
 

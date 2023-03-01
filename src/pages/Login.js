@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef, useContext } from 'react';
 import CustomDialog from '../components/CustomDialog';
 import { login } from '../apis/UserApi'
+import Restaurant from '@mui/icons-material/RestaurantOutlined';
 
 function Copyright(props) {
     return (
@@ -46,10 +47,6 @@ function Login(props) {
     const [idValid, setIdValid] = useState(true)
     const [passwordValid, setPasswordValid] = useState(true)
 
-    useEffect(() => {
-        setIsLogin(false)
-    }, [])
-
     const handleChangeLoginId = (val) => {
         setLoginId(val)
     }
@@ -70,7 +67,7 @@ function Login(props) {
         // TODO:  connect to real db
         if (params.loginId === 'admin' && params.password === '123456') {
             setIsLogin(true)
-            navigate('/landing')
+            navigate('/landing/dashboard')
         }
         // login(params, setIsLogin, navigate, setOpenDialog, refreshToken)
     };
@@ -101,7 +98,7 @@ function Login(props) {
                 >
                     <form onSubmit={handleSubmit} style={{ display: "Contents" }}>
                         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                            <LockOutlinedIcon />
+                            <Restaurant />
                         </Avatar>
                         <Typography component="h1" variant="h5">
                             Sign in

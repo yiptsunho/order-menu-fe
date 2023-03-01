@@ -4,6 +4,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { Container } from '@mui/material';
 import SideNavBar from '../components/SideNavBar';
+import Dashboard from './dashboard/Dashboard';
 
 export const LandingContext = createContext()
 
