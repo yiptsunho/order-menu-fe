@@ -38,14 +38,14 @@ function CustomDialog(props) {
             </DialogContent>
             <DialogActions>
                 <Grid container justifyContent="flex-end" spacing={1}>
-                    <Grid item md={3} sm={6} xs={12}>
+                    <Grid item md={4} sm={6} xs={12}>
                         <CustomButton
                             fullWidth
                             onClick={leftAction ?? defaultHandleClose}
                             description={leftLabel ?? 'Cancel'}
                         />
                     </Grid>
-                    <Grid item md={3} sm={6} xs={12}>
+                    <Grid item md={4} sm={6} xs={12}>
                         <CustomButton
                             fullWidth
                             onClick={rightAction ?? defaultHandleClose}

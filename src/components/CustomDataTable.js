@@ -3,7 +3,7 @@ import { DataGrid, GridToolbarQuickFilter } from '@mui/x-data-grid';
 import React, { useState } from 'react';
 
 function CustomDataTable(props) {
-    const { rows, columns, pageSize, rowsPerPageOptions, components, initialState, sx } = props
+    const { rows, columns, pageSize, rowsPerPageOptions, components, initialState, getRowId, sx } = props
     const [currentPageSize, setCurrentPageSize] = useState(pageSize ?? 5)
 
     return (
@@ -18,6 +18,7 @@ function CustomDataTable(props) {
             autoheight
             components={{ ...components }}
             initialState={{ ...initialState }}
+            getRowId={getRowId}
             sx={{ ...sx }}
         />
     )

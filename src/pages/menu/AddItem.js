@@ -1,15 +1,24 @@
 import { CssBaseline, Container, Paper, Grid } from '@mui/material';
 import React, { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { createItem } from '../../apis/MenuApi';
 import ItemForm from '../../components/ItemForm';
 
 function AddItem() {
+    const { menus } = useLocation().state;
+    const navigate = useNavigate();
+
     const handleAddItem = (params) => {
         const { itemName, originalPrice, image, category, belongs } = params
         const { isValid, errMsg } = validate(params)
 
         if (isValid) {
-            console.log(params)
+            let payload = {}
+            for (let param of params) {
+                const fieldName = param.fieldName
+                payload[fieldName] = param.value
+            }
+            createItem(payload, navigate)
         } else (
             console.log(errMsg, params)
         )
@@ -46,6 +55,7 @@ function AddItem() {
                 <Paper elevation={3} sx={{ borderRadius: "16px" }}>
                     <ItemForm
                         handleSubmit={handleAddItem}
+                        menus={menus}
                     />
                 </Paper>
             </Container>

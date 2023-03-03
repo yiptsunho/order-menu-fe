@@ -7,20 +7,21 @@ import OrderSummaryChart from './OrderSummaryChart';
 import CustomerChart from './CustomerChart';
 import SideNavBar from '../../components/SideNavBar';
 import TopSellingChart from './TopSellingChart';
+import Dollar from '@mui/icons-material/AttachMoney';
+import Money from '@mui/icons-material/Money';
+import Person from '@mui/icons-material/Person';
+import People from '@mui/icons-material/PeopleAlt';
 
 function Dashboard() {
     // const labels = Utils.months({ count: 7 });
     const labels = ["January", "February", "March", "April", "May", "June", "July"]
-    const data = {
-        labels: labels,
-        datasets: [{
-            label: 'My First Dataset',
-            data: [65, 59, 80, 81, 56, 55, 40],
-            fill: false,
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1
-        }]
-    };
+
+    const KPIs = [
+        { icon: <Dollar />, headline: "12k", subHeadline: "Total revenue today" },
+        { icon: <Money />, headline: "100k", subHeadline: "Total revenue this month" },
+        { icon: <Person />, headline: "346", subHeadline: "Total orders today" },
+        { icon: <Dollar />, headline: "1970", subHeadline: "Total orders this month" }
+    ]
 
     return (
         <React.Fragment>
@@ -31,100 +32,36 @@ function Dashboard() {
                 <Container maxWidth="xl" disableGutters>
                     <Grid container rowSpacing={2}>
                         <Grid container item md={12} alignItems='stretch' spacing={3}>
-                            <Grid item md={3} sm={6} display="flex">
-                                <Card sx={{ borderRadius: "12px", width: "-webkit-fill-available", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
-                                    <CardContent>
-                                        <Grid container display="flex" alignItems="center" columnSpacing={1}>
-                                            <Grid item md={3} display="flex" justifyContent="center">
-                                                <Paper elevation="0" sx={{ background: "#FEF3F1", borderRadius: "8px", padding: "8px" }}>
-                                                    <MenuBook />
-                                                </Paper>
-                                            </Grid>
-                                            <Grid container item md={8} display="flex" justifyContent="center">
-                                                <Grid container>
-                                                    <Typography variant="h5" component="div">
-                                                        12k
-                                                    </Typography>
+                            {KPIs.map(KPI => {
+                                return (
+                                    <Grid item md={3} sm={6} display="flex">
+                                        <Card sx={{ borderRadius: "12px", width: "-webkit-fill-available", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
+                                            <CardContent>
+                                                <Grid container display="flex" alignItems="center" columnSpacing={1}>
+                                                    <Grid item md={3} display="flex" justifyContent="center">
+                                                        <Paper elevation="0" sx={{ borderRadius: "8px", padding: "8px" }}>
+                                                            {KPI.icon}
+                                                        </Paper>
+                                                    </Grid>
+                                                    <Grid container item md={8} display="flex" justifyContent="center">
+                                                        <Grid container>
+                                                            <Typography variant="h5" component="div">
+                                                                {KPI.headline}
+                                                            </Typography>
+                                                        </Grid>
+                                                        <Grid container>
+                                                            <Typography color="text.secondary">
+                                                                {KPI.subHeadline}
+                                                            </Typography>
+                                                        </Grid>
+                                                    </Grid>
                                                 </Grid>
-                                                <Grid container>
-                                                    <Typography color="text.secondary">
-                                                        Total revenue today
-                                                    </Typography>
-                                                </Grid>
-                                            </Grid>
-                                        </Grid>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-                            <Grid item md={3} sm={6} display="flex">
-                                <Card sx={{ borderRadius: "12px", width: "-webkit-fill-available", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
-                                    <CardContent>
-                                        <Grid container display="flex" alignItems="center" columnSpacing={1}>
-                                            <Grid item md={3} display="flex" justifyContent="center">
-                                                <MenuBook />
-                                            </Grid>
-                                            <Grid container item md={8} display="flex" justifyContent="center">
-                                                <Grid container>
-                                                    <Typography variant="h5" component="div">
-                                                        100k
-                                                    </Typography>
-                                                </Grid>
-                                                <Grid container>
-                                                    <Typography color="text.secondary">
-                                                        Total revenue this month
-                                                    </Typography>
-                                                </Grid>
-                                            </Grid>
-                                        </Grid>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-                            <Grid item md={3} sm={6} display="flex">
-                                <Card sx={{ borderRadius: "12px", width: "-webkit-fill-available", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
-                                    <CardContent>
-                                        <Grid container display="flex" alignItems="center" columnSpacing={1}>
-                                            <Grid item md={3} display="flex" justifyContent="center">
-                                                <MenuBook />
-                                            </Grid>
-                                            <Grid container item md={8} display="flex" justifyContent="center">
-                                                <Grid container>
-                                                    <Typography variant="h5" component="div">
-                                                        346
-                                                    </Typography>
-                                                </Grid>
-                                                <Grid container>
-                                                    <Typography color="text.secondary">
-                                                        Total orders today
-                                                    </Typography>
-                                                </Grid>
-                                            </Grid>
-                                        </Grid>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-                            <Grid item md={3} sm={6} display="flex">
-                                <Card sx={{ borderRadius: "12px", width: "-webkit-fill-available", height: "-webkit-fill-available", display: "flex", alignItems: "center" }}>
-                                    <CardContent>
-                                        <Grid container display="flex" alignItems="center" columnSpacing={1}>
-                                            <Grid item md={3} display="flex" justifyContent="center">
-                                                <MenuBook />
-                                            </Grid>
-                                            <Grid container item md={8} display="flex" justifyContent="center">
-                                                <Grid container>
-                                                    <Typography variant="h5" component="div">
-                                                        1970
-                                                    </Typography>
-                                                </Grid>
-                                                <Grid container>
-                                                    <Typography color="text.secondary">
-                                                        Total orders this month
-                                                    </Typography>
-                                                </Grid>
-                                            </Grid>
-                                        </Grid>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
+                                            </CardContent>
+                                        </Card>
+                                    </Grid>
+                                )
+                            })
+                            }
                         </Grid>
                         <Grid container item md={12} alignItems='stretch' spacing={3}>
                             <Grid item md={6} display="flex">

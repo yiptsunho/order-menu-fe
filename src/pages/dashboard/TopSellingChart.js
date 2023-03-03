@@ -4,44 +4,44 @@ import { Area, AreaChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, X
 const data = [
     {
         "name": "Aug",
-        "uv": 5972,
-        "pv": 7300,
+        "Chicken Fried Rice": 5972,
+        "Beef Wellington": 7300,
         "amt": 2400
     },
     {
         "name": "Sep",
-        "uv": 2985,
-        "pv": 7374,
+        "Chicken Fried Rice": 2985,
+        "Beef Wellington": 7374,
         "amt": 2210
     },
     {
         "name": "Oct",
-        "uv": 5345,
-        "pv": 8357,
+        "Chicken Fried Rice": 5345,
+        "Beef Wellington": 8357,
         "amt": 2290
     },
     {
         "name": "Nov",
-        "uv": 4077,
-        "pv": 9471,
+        "Chicken Fried Rice": 4077,
+        "Beef Wellington": 9471,
         "amt": 2000
     },
     {
         "name": "Dec",
-        "uv": 9299,
-        "pv": 2409,
+        "Chicken Fried Rice": 9299,
+        "Beef Wellington": 2409,
         "amt": 2181
     },
     {
         "name": "Jan",
-        "uv": 9036,
-        "pv": 3077,
+        "Chicken Fried Rice": 9036,
+        "Beef Wellington": 3077,
         "amt": 2500
     },
     {
         "name": "Feb",
-        "uv": 9286,
-        "pv": 3396,
+        "Chicken Fried Rice": 9286,
+        "Beef Wellington": 3396,
         "amt": 2100
     }
 ];
@@ -66,8 +66,8 @@ function TopSellingChart() {
                 <Legend />
                 <CartesianGrid strokeDasharray="3 3" />
                 <Tooltip />
-                <Area type="monotone" dataKey="uv" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-                <Area type="monotone" dataKey="pv" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
+                <Area type="monotone" dataKey="Chicken Fried Rice" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                <Area type="monotone" dataKey="Beef Wellington" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
             </AreaChart>
         </ResponsiveContainer>
     )

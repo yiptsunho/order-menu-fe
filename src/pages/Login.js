@@ -39,7 +39,7 @@ function Login(props) {
 
     const { isLogin, setIsLogin, refreshToken } = useContext(LoginContext);
     const navigate = useNavigate()
-    const [loginId, setLoginId] = useState('')
+    const [username, setusername] = useState('')
     const [password, setPassword] = useState('')
     const [openDialog, setOpenDialog] = useState(false)
     const dialogTitle = useRef('Login failed')
@@ -47,8 +47,8 @@ function Login(props) {
     const [idValid, setIdValid] = useState(true)
     const [passwordValid, setPasswordValid] = useState(true)
 
-    const handleChangeLoginId = (val) => {
-        setLoginId(val)
+    const handleChangeusername = (val) => {
+        setusername(val)
     }
 
     const handleChangePassword = (val) => {
@@ -59,28 +59,42 @@ function Login(props) {
 
         event.preventDefault()
         const params = {
-            loginId: loginId,
+            username: username,
             password: password
         }
 
-        validation(params)
+        const { isValid, errMsg } = validation(params)
         // TODO:  connect to real db
-        if (params.loginId === 'admin' && params.password === '123456') {
-            setIsLogin(true)
-            navigate('/landing/dashboard')
+        // if (params.username === 'admin' && params.password === '123456') {
+        //     setIsLogin(true)
+        //     navigate('/landing/dashboard')
+        // }
+        if (isValid) {
+            login(params, setIsLogin, navigate, setOpenDialog, dialogTitle, dialogContent)
+        } else {
+            dialogTitle.current = "Warning"
+            dialogContent.current = errMsg
         }
-        // login(params, setIsLogin, navigate, setOpenDialog, refreshToken)
     };
 
     const validation = (params) => {
-        const { loginId, password } = params;
+        let isValid = true
+        let errMsg
 
-        if (!loginId) {
+        const { username, password } = params;
+
+        if (!username) {
             setIdValid(false)
+            isValid = false
+            errMsg = "Please input all mandatory fields"
         }
         if (!password) {
             setPasswordValid(false)
+            isValid = false
+            errMsg = "Please input all mandatory fields"
         }
+
+        return { isValid, errMsg }
     }
 
     return (
@@ -108,13 +122,13 @@ function Login(props) {
                                 error={!idValid}
                                 margin="normal"
                                 fullWidth
-                                id="email"
-                                label="Email Address"
-                                name="email"
+                                id="username"
+                                label="Username"
+                                name="username"
                                 autoFocus
-                                value={loginId}
-                                helperText={!idValid ? "Email address is mandatory" : ""}
-                                onChange={(e) => handleChangeLoginId(e.target.value)}
+                                value={username}
+                                helperText={!idValid ? "Username is mandatory" : ""}
+                                onChange={(e) => handleChangeusername(e.target.value)}
                             />
                             <TextField
                                 error={!passwordValid}

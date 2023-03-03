@@ -7,37 +7,37 @@ function RevenueChart() {
     const data = [
         {
             name: 'Aug',
-            uv: 4000,
+            total: 4000,
             amt: 2400,
         },
         {
             name: 'Sep',
-            uv: 3000,
+            total: 3000,
             amt: 2210,
         },
         {
             name: 'Oct',
-            uv: 2000,
+            total: 2000,
             amt: 2290,
         },
         {
             name: 'Nov',
-            uv: 2780,
+            total: 2780,
             amt: 2000,
         },
         {
             name: 'Dec',
-            uv: 1890,
+            total: 1890,
             amt: 2181,
         },
         {
             name: 'Jan',
-            uv: 2390,
+            total: 2390,
             amt: 2500,
         },
         {
             name: 'Feb',
-            uv: 3490,
+            total: 3490,
             amt: 2100,
         },
     ];
@@ -49,7 +49,7 @@ function RevenueChart() {
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip />
-                <Line type="monotone" dataKey="uv" stroke="#82ca9d" activeDot={{ r: 8 }} />
+                <Line type="monotone" dataKey="total" stroke="#82ca9d" activeDot={{ r: 8 }} />
             </LineChart>
         </ResponsiveContainer>
         // <Line

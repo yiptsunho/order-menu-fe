@@ -9,35 +9,40 @@ import CustomButton from './CustomButton';
 import { useNavigate } from 'react-router-dom';
 
 function ItemForm(props) {
-    const { data, handleSubmit, filteredRows } = props;
+    const { data, handleSubmit, filteredRows, menus } = props;
     const navigate = useNavigate();
 
-    const [form, setForm] = useState(data?.fieldList ?? [
+    const [form, setForm] = useState([
+        {
+            fieldName: "_id",
+            label: "Item code",
+            value: data ? data._id : null
+        },
         {
             fieldName: "name",
             label: "Item name",
-            value: null
+            value: data ? data.name : null
         },
         {
             fieldName: "originalPrice",
             label: "Original price",
-            value: null
+            value: data ? data.originalPrice : null
         },
+        // {
+        //     fieldName: "image",
+        //     label: "Item image",
+        //     value: null
+        // },
         {
-            fieldName: "image",
-            label: "Item image",
-            value: null
+            fieldName: "menu",
+            label: "Menu",
+            value: data ? data.menu : []
         },
-        {
-            fieldName: "category",
-            label: "Category",
-            value: []
-        },
-        {
-            fieldName: "belongs",
-            label: "Belongs to menu",
-            value: []
-        }
+        // {
+        //     fieldName: "belongs",
+        //     label: "Belongs to menu",
+        //     value: []
+        // }
     ]);
 
     const handleChange = (fieldName, newValue) => {
@@ -51,32 +56,37 @@ function ItemForm(props) {
     }
 
     const handleReset = () => {
-        setForm(data?.fieldList ?? [
+        setForm([
+            {
+                fieldName: "_id",
+                label: "Item code",
+                value: data ? data._id : null
+            },
             {
                 fieldName: "name",
                 label: "Item name",
-                value: null
+                value: data ? data.name : null
             },
             {
                 fieldName: "originalPrice",
                 label: "Original price",
-                value: null
+                value: data ? data.originalPrice : null
             },
             {
-                fieldName: "image",
-                label: "Item image",
-                value: null
-            },
-            {
-                fieldName: "category",
-                label: "Category",
-                value: []
-            },
-            {
-                fieldName: "belongs",
-                label: "Belongs to menu",
-                value: []
+                fieldName: "menu",
+                label: "Menu",
+                value: data ? data.menu : []
             }
+            // {
+            //     fieldName: "image",
+            //     label: "Item image",
+            //     value: null
+            // },
+            // {
+            //     fieldName: "belongs",
+            //     label: "Belongs to menu",
+            //     value: []
+            // }
         ]);
     }
 
@@ -99,7 +109,7 @@ function ItemForm(props) {
                 </Grid>
                 <Grid container item rowSpacing={2}>
                     {form.map((field, fieldIndex) => {
-                        if (field.fieldName === "category" || field.fieldName === "belongs") {
+                        if (field.fieldName === "menu") {
                             return (
                                 <Grid container item md={12} alignItems='center' justifyContent="space-between">
                                     <Grid item md={4} sm={12} xs={12}>
@@ -111,9 +121,9 @@ function ItemForm(props) {
                                         <Autocomplete
                                             multiple
                                             name={field.fieldName}
-                                            options={field.fieldName === "category" ? category : menu}
-                                            getOptionLabel={(option) => option.label}
-                                            value={field.value}
+                                            options={menus}
+                                            getOptionLabel={(option) => option.name}
+                                            value={field.value.map(id => { return menus.find(menu => menu._id == id) })}
                                             renderInput={(params) => (
                                                 <TextField
                                                     {...params}
@@ -121,7 +131,10 @@ function ItemForm(props) {
                                                 />
                                             )}
                                             filterSelectedOptions
-                                            onChange={(e, newValue) => handleChange(field.fieldName, newValue)}
+                                            onChange={(e, newValue) => {
+                                                const idList = newValue.map(value => { return value._id })
+                                                handleChange(field.fieldName, idList)
+                                            }}
                                         />
                                     </Grid>
                                 </Grid>
@@ -152,14 +165,14 @@ function ItemForm(props) {
                     }
                 </Grid>
                 <Grid container item rowSpacing={1} columnSpacing={2} justifyContent='end'>
-                    <Grid item md={2} sm={4} xs={6}>
+                    {/* <Grid item md={2} sm={4} xs={6}>
                         <CustomButton
                             fullWidth
                             variant="contained"
                             onClick={handleReset}
                             description="Reset"
                         />
-                    </Grid>
+                    </Grid> */}
                     <Grid item md={2} sm={4} xs={6}>
                         <CustomButton
                             fullWidth
